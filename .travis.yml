@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- "10"
+- '10'
 
 sudo: true
 dist: trusty
@@ -10,6 +10,9 @@ cache: npm
 branches:
   only:
   - master
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_d2c6f25afb30_key -iv $encrypted_d2c6f25afb30_iv -in client-secret.json.enc -out client-secret.json -d
 
 before_script:
 - export CHROME_BIN=/usr/bin/google-chrome
