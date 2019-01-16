@@ -20,16 +20,16 @@ branches:
   - master
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_d2c6f25afb30_key -iv $encrypted_d2c6f25afb30_iv -in client-secret.json.enc -out client-secret.json -d
-  - gcloud version || true
-  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
-  - source $HOME/google-cloud-sdk/path.bash.inc
-  - gcloud version
-  - gcloud components install kubectl
-  - gcloud auth activate-service-account --key-file client-secret.json
-  - gcloud config set project code-and-play
-  - gcloud config set compute/zone europe-west3-c
-  - gcloud container clusters get-credentials cap
+ # - openssl aes-256-cbc -K $encrypted_d2c6f25afb30_key -iv $encrypted_d2c6f25afb30_iv -in client-secret.json.enc -out client-secret.json -d
+ # - gcloud version || true
+ # - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
+ # - source $HOME/google-cloud-sdk/path.bash.inc
+ # - gcloud version
+ # - gcloud components install kubectl
+ # - gcloud auth activate-service-account --key-file client-secret.json
+ # - gcloud config set project code-and-play
+ # - gcloud config set compute/zone europe-west3-c
+ # - gcloud container clusters get-credentials cap
 
 before_script:
 - export CHROME_BIN=/usr/bin/google-chrome
@@ -46,13 +46,13 @@ script:
 - ng build --prod
 
 # build and push the docker image
-- source ./scripts/buid_vars.sh
-- docker build --no-cache=true -t $DOCKER_IMAGE .
-- docker tag $DOCKER_IMAGE eu.gcr.io/code-and-play/$DOCKER_IMAGE
-- gcloud docker -- push eu.gcr.io/code-and-play/$DOCKER_IMAGE
+#- source ./scripts/buid_vars.sh
+#- docker build --no-cache=true -t $DOCKER_IMAGE .
+#- docker tag $DOCKER_IMAGE eu.gcr.io/code-and-play/$DOCKER_IMAGE
+#- gcloud docker -- push eu.gcr.io/code-and-play/$DOCKER_IMAGE
 
 # prepare kubernetes deployment files
-- ./scripts/prepare_deployment_files.sh
+#- ./scripts/prepare_deployment_files.sh
 
 # deploy to cluster
 # TODO docker image does not yet run properly
