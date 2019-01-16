@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${SERVICE_NAME}
+  #namespace: services
+  labels:
+    app: "${SERVICE_NAME}"
+spec:
+  selector:
+    app: "${SERVICE_NAME}"
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    name: http
