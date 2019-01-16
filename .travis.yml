@@ -6,15 +6,18 @@ env:
   global:
   - SERVICE_NAME=chat-frontend
 
-sudo: true
-dist: trusty
+cache:
+  directories:
+  - "$HOME/google-cloud-sdk/"
+  - "$HOME/.npm"
+  - "node_modules"
 
-cache: npm
+#sudo: true
+#dist: trusty
 
 branches:
   only:
   - master
-
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_d2c6f25afb30_key -iv $encrypted_d2c6f25afb30_iv -in client-secret.json.enc -out client-secret.json -d
@@ -31,11 +34,11 @@ before_install:
 before_script:
 - export CHROME_BIN=/usr/bin/google-chrome
 - export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- sudo apt-get update
-- sudo apt-get install -y libappindicator1 fonts-liberation
-- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-- sudo dpkg -i google-chrome*.deb
+#- sh -e /etc/init.d/xvfb start
+#- sudo apt-get update
+#- sudo apt-get install -y libappindicator1 fonts-liberation
+#- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#- sudo dpkg -i google-chrome*.deb
 
 script:
 #- ng test --watch false -cc
